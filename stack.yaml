@@ -1,0 +1,47 @@
+resolver: lts-8.5
+
+# TODO: we should update the docker image to use more updated version of cocos2d-hs (now with master and android in the same branch)
+packages:
+- '.'
+- location:
+    git: https://github.com/lynnard/Hipmunk
+    commit: c489b6f416866fb22e2aaa467ffa666b007faa27
+  extra-dep: true
+- location:
+    git: https://github.com/reflex-frp/reflex
+    commit: c617057bc4b9f6b75e4f4ebe2a4f2f818bd7d1a0
+  extra-dep: true
+- location:
+    git: https://github.com/khumba/hoppy
+    commit: 0c4d1086d9ddd5508395c1553f8f1ff94e27b50a
+  subdirs: # we have to pull generator & std from git as the versions on hackage have some problem
+    - generator
+    - std
+  extra-dep: true
+- location:
+    git: https://github.com/lynnard/cocos2d-hs
+    commit: b7c4d8545f8e6223430a767af3b9e1eae31c6ef6
+  extra-dep: true
+- location:
+    git: https://github.com/lynnard/reflex-cocos2d
+    commit: 7e9a56a54431a040bcc94ab246b201cd09792887
+  extra-dep: true
+
+extra-deps:
+# TODO: check if these are actually needed?
+- directory-1.2.7.1
+- haskell-src-exts-1.17.1
+- haskell-src-meta-0.6.0.14
+- hlint-1.9.35
+- prim-uniq-0.1.0.1
+- ref-tf-0.4.0.1
+- hoppy-runtime-0.3.0
+- hoppy-std-0.3.0
+
+flags:
+    reflex:
+        specialize-to-spidertimeline-global: true
+    cocos2d-hs:
+        no-gen: true
+
+extra-package-dbs: []

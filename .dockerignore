@@ -1,0 +1,19 @@
+# ignore files except those for android build
+*
+# haskell files
+!hs-src
+!*.cabal
+!Makefile
+!Dockerfile*
+!*.hs
+# the dist directory is like cabal's cache and can speed up build
+!dist
+# need these for ndk build
+!Classes
+!include
+# android-studio project files
+!proj.android-studio/app
+proj.android-studio/app/build
+proj.android-studio/app/obj
+proj.android-studio/**/*.so
+!proj.android-studio/build-cfg.json

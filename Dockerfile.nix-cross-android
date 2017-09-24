@@ -1,0 +1,9 @@
+FROM lynnard/reflex-cocos2d-android-builder
+
+# use like this: docker run --rm -v `pwd`:/target image_tag [make_target]
+ENTRYPOINT ["/nix-build-ghc-android-runner", "--arg", "extraGhcPkgs", "import /cocos2d.nix", "--", "make", "-C", "/app", "TARGET=android"]
+
+# add additional packages by
+# RUN /nix-build-ghc-android-runner --arg extraGhcPkgs 'p: [ p.MonadPrompt ]'
+
+COPY . /app

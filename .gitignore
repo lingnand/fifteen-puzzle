@@ -1,0 +1,25 @@
+dist
+dist-*
+*.o
+*.hi
+*.chi
+*.chs.h
+*.dyn_o
+*.dyn_hi
+.cabal-sanbox/
+cabal.sandbox.config
+.stack-work/
+*.a
+*.so
+/bin/
+*.mp4
+.DS_Store
+*.o.d
+/proj.android-studio/**/build/
+/proj.android-studio/**/local.properties
+/proj.android-studio/.idea/
+/proj.android-studio/.gradle/
+/proj.android-studio/**/*.iml
+/proj.android-studio/**/gdb.setup
+# ignore the assets
+/proj.android-studio/app/assets/
