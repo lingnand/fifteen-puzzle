@@ -46,7 +46,7 @@ newGrid GridConfig{ gridWidth = wid } = Grid $ A.array bounds
   where
     bounds = ((0,0), (wid-1,wid-1))
     initNum (x,y) | x == wid-1 && y == 0 = Nothing
-                  | otherwise = Just $ (wid-1-y)*wid+x+1
+                  | otherwise            = Just $ (wid-1-y)*wid+x+1
 
 val :: Index -> Grid -> Maybe Int
 val x (Grid arr) = arr A.! x
@@ -58,7 +58,7 @@ hasWon :: Grid -> Bool
 hasWon (Grid arr) = all (uncurry valid) (A.assocs arr)
   where valid (x,y) v
           | x == w, y == 0 = isNothing v
-          | otherwise = v == Just ((w-y)*(w+1) + x+1)
+          | otherwise      = v == Just ((w-y)*(w+1) + x+1)
         (_, (w, _)) = A.bounds arr
 
 step :: Index -> Action -> Grid -> Maybe Grid
@@ -160,9 +160,9 @@ renderTile RenderConfig{..} pos dynNum =
       , textureRect := Rect 0 (pure tileWidth)
       ]
     label_
-      [ dyn' text       := maybe "" show <$> dynNum
-      , systemFontSize  := tileFontSize
-      , textColor       := opaque white
+      [ dyn' text      := maybe "" show <$> dynNum
+      , systemFontSize := tileFontSize
+      , textColor      := opaque white
       ]
 
 main :: IO ()
@@ -173,10 +173,10 @@ main = mainScene $ do
         { gridWidth = 4
         }
       rc = RenderConfig
-        { tileWidth = 100
-        , tileGap = 10
+        { tileWidth    = 100
+        , tileGap      = 10
         , tileFontSize = 20
-        , gridPos = midP
+        , gridPos      = midP
         }
       midP = P $ sz/2
       eStep = fforMaybe eTouchSeq $ \sq -> genStep (screenToIndex gc rc) <$>
@@ -200,9 +200,9 @@ main = mainScene $ do
         , position       := midP
         ]
       button_
-        [ titleText := "Restart"
+        [ titleText     := "Restart"
         , titleFontSize := 30
-        , position := midP - 0^&100
+        , position      := midP - 0^&100
         ]
     -- wait for restart
     wait_ eRestart
