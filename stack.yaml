@@ -1,6 +1,5 @@
 resolver: lts-8.5
 
-# TODO: we should update the docker image to use more updated version of cocos2d-hs (now with master and android in the same branch)
 packages:
 - '.'
 - location:
