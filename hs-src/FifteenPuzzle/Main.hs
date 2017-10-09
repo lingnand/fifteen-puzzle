@@ -168,8 +168,7 @@ renderTile RenderConfig{..} pos dynNum =
 main :: IO ()
 main = mainScene $ do
   S sz <- getWindowSize
-  eeTouch <- getTouchEvents
-  eTouchSeq <- accumTouchSeqEvent eeTouch
+  eTouchSeq <- accumTouchSeqEvent =<< getTouchEvents
   let gc = GridConfig
         { gridWidth = 4
         }
@@ -182,11 +181,6 @@ main = mainScene $ do
       midP = P $ sz/2
       eStep = fforMaybe eTouchSeq $ \sq -> genStep (screenToIndex gc rc) <$>
         sq^?touchFirst.touchLocation <*> sq^?touchLast.touchLocation
-  -- performEvent_ $ liftIO . debug . ("/began/ "++) . show <$> eeTouch^.touchBegan
-  -- performEvent_ $ liftIO . debug . ("/end/ "++) . show <$> eeTouch^.touchEnded
-  -- performEvent_ . fforMaybe eTouchSeq $ \s ->
-  --   (\l -> debug $ show (s^.touchFirst) ++ ", " ++ show l) <$> (s^?touchLast)
-  -- performEvent_ $ liftIO . debug . ("STEP: "++) . show <$> eStep
   runEventVisitorT_ $ forever $ do
     -- start game
     let grid0 = newGrid gc
